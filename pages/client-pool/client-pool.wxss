@@ -104,7 +104,7 @@
 }
 
 .client-pool-list-item-info-time {
-    width: 200rpx;
+    width: 300rpx;
 }
 
 .client-pool-list-item-info-source {

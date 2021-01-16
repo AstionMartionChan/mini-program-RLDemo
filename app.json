@@ -8,7 +8,9 @@
     "pages/message/message",
     "pages/mine/mine",
     "pages/edit-card/edit-card",
-    "pages/activity/activity"
+    "pages/activity/activity",
+    "pages/list",
+    "pages/list/list"
   ],
   "window": {
     "backgroundTextStyle": "light",

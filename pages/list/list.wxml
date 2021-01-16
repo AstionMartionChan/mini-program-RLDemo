@@ -1,0 +1,59 @@
+<view class="container">
+    <view class="client-pool">
+        <!-- <view class="client-pool-search pt20 pr40 pl40">
+            <view class="client-pool-search-body pl20 pr20">
+                <icon type="search" size="16"/>
+                <input class="pl20" type="text" value="{{clientCondition.data.searchValue}}" placeholder="请输入名称或者ID" confirm-type="search" bindinput="searchChange" bindconfirm="bindconfirm"/>
+                <icon type="clear" size="14" hidden="{{!clientCondition.data.searchValue.length}}" bindtap="clearSearchValue"/>
+            </view>
+        </view> -->
+        <scroll-view class="scroll-view client-pool-list pt10" scroll-y="{{true}}" lower-threshold="1"  bindtouchstart="touchstart" bindtouchmove="touchmove">
+            <!-- <view class="placeholder"></view>
+            <view class="pull-refresh {{pull.isLoading ? 'chu' : 'jin'}}">
+                <image class="icon-refresh z-index-1" src="{{pull.loading}}" />
+                <view class="fs24 pt20 f-color-666 z-index-1">{{pull.pullText}}</view>
+            </view> -->
+            <view class="pr40 pl40">
+                <view class="client-pool-list-item pt20 pb20" wx:for="{{cluesData}}" wx:for-item="item" wx:for-index="key" wx:key="key" bindtap="toCustomerDetails">
+                    <!-- <view class="client-pool-list-item-img pr40">
+                        <image src="https://wx.qlogo.cn/mmopen/vi_32/a2G20RAuIMOjLBa9dDYfICADAIuqiciaM2gfpYr1jD1sgiaDITdYWFLAToXuzPbPFhhxEOjeAZxibq8lYoNgicDnunw/132" />
+                    </view> -->
+                    <view class="client-pool-list-item-info">
+                        <view class="client-pool-list-item-info-name">建友机型代码：{{item.jyMachineCode}}</view>
+                        <view class="client-pool-list-item-info-data">
+                            <view class="client-pool-list-item-info-time lh2-5 fs24 f-color-main">代理店：{{item.customerOrgName}}</view>
+                            <view wx:if="{{item.customerType==1}}" class="client-pool-list-item-info-source lh2-5 fs24 f-color-666 uniline">客户类型：矿山客户</view>
+                            <view wx:else class="client-pool-list-item-info-source lh2-5 fs24 f-color-666 uniline">客户类型：白金客户</view>
+                        </view>
+                        <view class="client-pool-list-item-info-data">
+                            <view class="client-pool-list-item-info-time lh2-5 fs24 f-color-main uniline">客户名称：{{item.customerName}}</view>
+                            <view class="client-pool-list-item-info-source lh2-5 fs24 f-color-666 uniline">建友客户名称：{{item.jyCustomerName}}</view>
+                        </view>
+                        <view class="client-pool-list-item-info-data">
+                            <view class="client-pool-list-item-info-time lh2-5 fs24 f-color-main uniline">建友机型名称：{{item.jyMachineName}}</view>
+                            <!-- <view wx:if="{{item.serviceLevel==1}}" class="client-pool-list-item-info-source lh2-5 fs24 f-color-666 uniline">服务等级：一级白金</view> -->
+                            <view wx:if="{{item.serviceLevel==1}}" class="client-pool-list-item-info-source lh2-5 fs24 f-color-666 uniline">服务等级：一级白金</view>
+                            <view wx:elif="{{item.serviceLevel==2}}" class="client-pool-list-item-info-source lh2-5 fs24 f-color-666 uniline">服务等级：二级白金</view>
+                            <view wx:elif="{{item.serviceLevel==3}}" class="client-pool-list-item-info-source lh2-5 fs24 f-color-666 uniline">服务等级：三级白金</view>
+                            <view wx:elif="{{item.serviceLevel==4}}" class="client-pool-list-item-info-source lh2-5 fs24 f-color-666 uniline">服务等级：四级白金</view>
+                            <view wx:else class="client-pool-list-item-info-source lh2-5 fs24 f-color-666 uniline">服务等级：暂无</view>
+                        </view>
+                        <view class="client-pool-list-item-info-data">
+                            <view class="client-pool-list-item-info-time lh2-5 fs24 f-color-main uniline">矿山等级：{{item.mineLevel}}</view>
+                            <view class="client-pool-list-item-info-source lh2-5 fs24 f-color-666 uniline">营业等级：白金客户</view>
+                        </view>
+                    </view>
+                    <!-- <view class="client-pool-list-item-status">
+                        <view wx:if="{{key%2}}" class="status fs16 f-color-fff pt6 pr10 pb6 pl10">New</view>
+                        <view wx:else class="status fs16 f-color-fff pt6 pr10 pb6 pl10">手机号</view>
+                        <image class="icon-right ml20" src="../../image/common/icon_right.png" />
+                    </view> -->
+                </view>
+            </view>
+            <view class="pull-refresh">
+                <image class="icon-refresh z-index-1" wx:if="{{push.isLoading}}" src="{{push.loading}}" />
+                <view class="fs24 f-color-666 z-index-1">{{push.pullText}}</view>
+            </view>
+        </scroll-view>
+    </view>
+</view>

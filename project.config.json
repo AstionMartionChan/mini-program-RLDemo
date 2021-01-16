@@ -39,7 +39,7 @@
     "minifyWXSS": true
   },
   "compileType": "miniprogram",
-  "libVersion": "2.9.3",
+  "libVersion": "2.14.3",
   "appid": "wxc4c667a05bcbd5f4",
   "projectname": "weixin",
   "debugOptions": {

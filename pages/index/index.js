@@ -24,6 +24,7 @@ Page({
 		if(!app.globalData.hasUserInfo) {
 			wx.switchTab({
 				url: '../client-pool/client-pool'
+				// url: '../list/list'
 			})
 		} else {
 			wx.reLaunch({

@@ -1,3 +1,71 @@
+// // pages/list/list.js
+// Page({
+
+//   /**
+//    * 页面的初始数据
+//    */
+//   data: {
+
+//   },
+
+//   /**
+//    * 生命周期函数--监听页面加载
+//    */
+//   onLoad: function (options) {
+
+//   },
+
+//   /**
+//    * 生命周期函数--监听页面初次渲染完成
+//    */
+//   onReady: function () {
+
+//   },
+
+//   /**
+//    * 生命周期函数--监听页面显示
+//    */
+//   onShow: function () {
+
+//   },
+
+//   /**
+//    * 生命周期函数--监听页面隐藏
+//    */
+//   onHide: function () {
+
+//   },
+
+//   /**
+//    * 生命周期函数--监听页面卸载
+//    */
+//   onUnload: function () {
+
+//   },
+
+//   /**
+//    * 页面相关事件处理函数--监听用户下拉动作
+//    */
+//   onPullDownRefresh: function () {
+
+//   },
+
+//   /**
+//    * 页面上拉触底事件的处理函数
+//    */
+//   onReachBottom: function () {
+
+//   },
+
+//   /**
+//    * 用户点击右上角分享
+//    */
+//   onShareAppMessage: function () {
+
+//   }
+// })
+
+
 import { howLongAgo } from '../../utils/util'
 import { sourceData, cateData } from '../../utils/publicData'
 Page({
@@ -14,7 +82,49 @@ Page({
             pageNum: 1,
             pageSize: 10
         },
-        cluesData: [],
+        cluesData: [
+            // {
+            //     customerOrgName: "四川中辰",
+            //     customerType: 1, 
+            //     customerId: "CSSCZH15102709", 
+            //     customerName: "胡启兵", 
+            //     wholeMachineId: "SCZ9001719", 
+            //     jyMachineName: "ZX360H-5A",
+            //     jyCustomerCode: "SCZ9001719", 
+            //     jyMachineCode: "DDKB2300336",
+            //     jyCustomerName: "胡启兵",
+            //     serviceLevel: 1,
+            //     mineLevel: "",
+            //     businessLevel: "白金客户"
+            // },
+            // {
+            //     customerOrgName: "四川中辰",
+            //     customerType: 1, 
+            //     customerId: "CSSCZH15102709", 
+            //     customerName: "胡启兵", 
+            //     wholeMachineId: "SCZ9001719", 
+            //     jyMachineName: "ZX360H-5A",
+            //     jyCustomerCode: "SCZ9001719", 
+            //     jyMachineCode: "DDKB2300336",
+            //     jyCustomerName: "胡启兵",
+            //     serviceLevel: 1,
+            //     mineLevel: "",
+            //     businessLevel: "白金客户"
+            // },{
+            //     customerOrgName: "四川中辰",
+            //     customerType: 1, 
+            //     customerId: "CSSCZH15102709", 
+            //     customerName: "胡启兵", 
+            //     wholeMachineId: "SCZ9001719", 
+            //     jyMachineName: "ZX360H-5A",
+            //     jyCustomerCode: "SCZ9001719", 
+            //     jyMachineCode: "DDKB2300336",
+            //     jyCustomerName: "胡启兵",
+            //     serviceLevel: 1,
+            //     mineLevel: "",
+            //     businessLevel: "白金客户"
+            // }
+        ],
         pull: {
             isLoading: false,
             loading: '../../image/common/pull_refresh.gif',
@@ -30,8 +140,22 @@ Page({
         isShow_01: false,
         picker_01_data:[],
     },
-    onLoad() {
-        // this.loadMore()
+    onLoad(options) {
+        console.log(options.customerId)
+        var _this = this
+        wx.request({
+            url: 'http://192.168.2.7:8080/get/' + options.customerId, 
+            method: "GET",
+            success (res) {
+                console.log(res.data)  
+                _this.setData2Page(res.data)
+            }
+          })
+    },
+    setData2Page: function(data) {
+        this.setData({
+            cluesData: data ? data : null,
+        })
     },
     /**搜索框内容改变 */
     searchChange(e) {
@@ -42,7 +166,7 @@ Page({
         // })
         var _this = this
         wx.request({
-            url: 'http://192.168.2.7:8080/search/', 
+            url: 'http://localhost:8080/search/', 
             method: "POST",
             header: {
                 'content-type': 'application/json' // 默认值
@@ -58,7 +182,7 @@ Page({
     },
     setData2Page: function(data) {
         this.setData({
-            cluesData: data ? data : [],
+            cluesData: data ? data : null,
         })
     },
     /**点击键盘搜索按钮触发 */
@@ -188,12 +312,8 @@ Page({
     //     }
     // },
     /**跳转客户详情 */
-    toCustomerDetails(e) {
-        let customerId=e.currentTarget.dataset.id; 
-        
-        wx.navigateTo({
-			url: '../list/list?customerId=' + customerId
-		})
+    toCustomerDetails() {
+   
 
     },
     myPickerChange(e) {
